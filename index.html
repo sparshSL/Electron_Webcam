@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Webcam Application</title>
+  <style>
+    video{
+        width: 100%;
+        height: auto;
+    }
+    canvas{
+        width: 100%;
+        height: auto;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #controls {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    button {
+      margin: 5px;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <video id="webcam" autoplay></video>
+  <canvas id="canvas" style="display: none;"></canvas>
+  <div id="controls">
+    <button id="blackAndWhite">Black & White</button>
+    <button id="saveImage">Save Image</button>
+  </div>
+  <script src="renderer.js"></script>
+</body>
+</html>
