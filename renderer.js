@@ -1,3 +1,4 @@
+// Get all elements in variables
 const video = document.getElementById('webcam');
 const canvas = document.getElementById('canvas');
 const context = canvas.getContext('2d');
@@ -7,16 +8,19 @@ const saveImageButton = document.getElementById('saveImage');
 let isBlackAndWhite = false;
 let animationFrameId;
 
+//Getting vebcam feed
 navigator.mediaDevices.getUserMedia({ video: true })
   .then(stream => {
     video.srcObject = stream;
     video.play();
-    requestAnimationFrame(applyFilter);
+    requestAnimationFrame(applyFilter); //apply a filter on feed using the requestAnimationFrame timer
   })
   .catch(error => {
     console.error('Error accessing webcam:', error);
   });
 
+
+  //function to convert image to BW using RGB Channels
   function applyBlackAndWhiteFilter(imageData) {
     const data = imageData.data;
   
@@ -30,21 +34,22 @@ navigator.mediaDevices.getUserMedia({ video: true })
     return imageData;
   };
   
-    function captureFrame() {
+  //Function to capture image got in webcam
+  function captureFrame() {
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
     return context.getImageData(0, 0, canvas.width, canvas.height);
   };
   
-
+  //Function to get Current frame and convert it if isBlackAndWhite toggle is on
   function applyFilter() {
     if (isBlackAndWhite) {
       const imageData = captureFrame();
       context.putImageData(applyBlackAndWhiteFilter(imageData), 0, 0);
     }
   
-    if (isBlackAndWhite) {
+    if (isBlackAndWhite) { //Switch the feed from the video block or canvas block in the html file
       video.style.display = 'none';
       canvas.style.display = 'block';
     } else {
@@ -55,6 +60,8 @@ navigator.mediaDevices.getUserMedia({ video: true })
     animationFrameId = requestAnimationFrame(applyFilter);
   }
   
+
+  //Function to save the image either color or BW depending on toggle
   function saveImage() {
     const imageData = captureFrame();
     if (isBlackAndWhite) {
@@ -70,11 +77,12 @@ navigator.mediaDevices.getUserMedia({ video: true })
     document.body.removeChild(link);
   }
   
+  //Event listners for the 2 buttons
   blackAndWhiteButton.addEventListener('click', () => {
-  isBlackAndWhite = !isBlackAndWhite;
-  if (!isBlackAndWhite) {
-    video.srcObject = video.srcObject; // Reset the video stream
-  }
-});
+    isBlackAndWhite = !isBlackAndWhite;
+    if (!isBlackAndWhite) {
+      video.srcObject = video.srcObject; // Reset the video stream
+    }
+  });
 
-saveImageButton.addEventListener('click', saveImage);
+  saveImageButton.addEventListener('click', saveImage);

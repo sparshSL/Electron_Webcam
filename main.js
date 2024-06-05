@@ -2,6 +2,7 @@ const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
 function createWindow() {
+  //Create main application window
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 700,
@@ -13,7 +14,7 @@ function createWindow() {
     },
   });
 
-  mainWindow.loadFile('index.html');
+  mainWindow.loadFile('index.html'); //Load my html file into the window which also contains js files
 }
 
 app.whenReady().then(() => {

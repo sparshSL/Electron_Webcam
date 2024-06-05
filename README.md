@@ -1,5 +1,5 @@
 # Electron_Webcam
-A webcam app to take live feed and convert to black and white and also save image for windows.
+A webcam app to take live feed and can toggle the video to black and white while also proving a save image option.
 
 1. Please clone the repository in VScode
 2. Install electron using 
@@ -8,3 +8,4 @@ A webcam app to take live feed and convert to black and white and also save imag
 3. Run the application using
     - npm start
 
+I have also put a compressed file (dist.rar) that is the packaged version of the app with a .exe file to directly run the application
